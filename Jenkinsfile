@@ -7,4 +7,7 @@ node{
   stage('initial set up'){
   sh('mvn clean compile')
   }
+  stage('run test'){
+  sh('mvn test')
+  }
 }
