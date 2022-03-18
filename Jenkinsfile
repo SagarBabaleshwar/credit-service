@@ -10,4 +10,10 @@ node{
   stage('run test'){
   sh('mvn test')
   }
+  stage('Code Quality Analysis'){    
+    withSonarQubeEnv('sagarsonar'){
+                 sh 'mvn sonar:sonar -Dsonar.organization=sagarinfotech -Dsonar.projectKey=credit-service-sagarb'		
+    		}
+  }
+
 }
