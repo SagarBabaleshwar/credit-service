@@ -20,6 +20,7 @@ node{
     withSonarQubeEnv('sagarsonar'){
                  sh 'mvn sonar:sonar -Dsonar.organization=sagarinfotech -Dsonar.projectKey=credit-service-sagarb'		
     		}
+	  stash includes: '*', name: 'myproject'
   }
 
 }
