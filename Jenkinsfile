@@ -1,3 +1,9 @@
+podTemplate(cloud: 'kubernetes',label: 'kubernetes',
+            containers: [
+                    containerTemplate(name: 'podman', image: 'quay.io/containers/podman', privileged: true, command: 'cat', ttyEnabled: true)
+					
+            ]) 
+{
 node{
   def MAVEN_HOME = tool "mymaven"
   env.PATH = "${env.PATH}:${MAVEN_HOME}/bin"
@@ -16,4 +22,14 @@ node{
     		}
   }
 
+}
+node('kubernetes'){
+   container('podman') {
+	stage('Image Build'){
+	   unstash 'myproject'
+	   sh 'podman image build -t credit-service .'	
+		
+	}
+   }
+}
 }
